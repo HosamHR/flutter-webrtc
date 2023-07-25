@@ -56,3 +56,11 @@ android/.settings/org.eclipse.buildship.core.prefs
 
 # vs
 *.pdb
+
+# Genertaed stuff that i don't know
+android/local.properties
+android/gradle/wrapper/gradle-wrapper.jar
+android/gradle/wrapper/gradle-wrapper.properties
+android/gradlew
+android/gradlew.bat
+.fvm/flutter_sdk
