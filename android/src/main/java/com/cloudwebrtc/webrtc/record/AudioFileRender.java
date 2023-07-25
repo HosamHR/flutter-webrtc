@@ -21,9 +21,9 @@ import org.webrtc.audio.JavaAudioDeviceModule.SamplesReadyCallback;
 public class AudioFileRender implements SamplesReadyCallback {
     private static final String TAG = "AudioFileRenderer";
     private static final int OUTPUT_CHANNEL = 1;
-    private static final int OUT_SAMPLE = 8000;
+    private static final int OUT_SAMPLE = 44100;
 
-    private static final int OUT_BITRATE = 128;
+    private static final int OUT_BITRATE = 256;
     private static final int MP3_BUFFER_SIZE = 8192;
     private static final int OUTPUT_STREAM_BUFFER = 8192;
 
