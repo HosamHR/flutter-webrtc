@@ -23,6 +23,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class AudioSwitchManager {
+    static public final String TAG = "AudioSwitchManager";
     @SuppressLint("StaticFieldLeak")
     public static AudioSwitchManager instance;
     @NonNull
@@ -135,6 +136,30 @@ public class AudioSwitchManager {
     }
 
     public void enableSpeakerphone(boolean enable) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            if(!enable) {
+                audioManager.clearCommunicationDevice();
+                return;
+            }
+            List<AudioDeviceInfo> devices =  audioManager.getAvailableCommunicationDevices();
+            AudioDeviceInfo speakerDevice = null;
+            for (AudioDeviceInfo device : devices) {
+                if (device.getType() == AudioDeviceInfo.TYPE_BUILTIN_SPEAKER) {
+                    speakerDevice = device;
+                    break;
+                }
+            }
+            if (speakerDevice != null) {
+                boolean result = audioManager.setCommunicationDevice(speakerDevice);
+                if (!result) {
+                    Log.e(TAG,"Unable to enable spekaer");
+                }
+                return;
+            }
+            Log.e(TAG,"Device doesn't support speaker");
+
+            return;
+        }
         audioManager.setSpeakerphoneOn(enable);
         _speakerphoneOn = enable;
     }
